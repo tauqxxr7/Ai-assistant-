@@ -15,8 +15,8 @@ RUN npm install
 
 FROM node:22-alpine AS frontend-builder
 WORKDIR /app
-ARG NEXT_PUBLIC_API_BASE_URL
-ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 COPY --from=frontend-deps /app/node_modules ./node_modules
 COPY frontend .
 RUN npm run build

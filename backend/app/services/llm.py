@@ -32,12 +32,15 @@ class LLMClient:
         return json.dumps(
             {
                 "answer": (
-                    "I can outline the answer, but no LLM API key is configured. "
-                    "Configure OPENAI_API_KEY or an OpenAI-compatible endpoint for generated responses. "
+                    "Demo mode: configure API keys for live answers. "
+                    "No LLM API key is configured, so I cannot synthesize a live verified answer yet. "
+                    "Set OPENAI_API_KEY or an OpenAI-compatible endpoint before using this for real-time answers. "
                     f"Request received: {prompt[:220]}"
                 ),
                 "confidence": "low",
                 "what_was_verified": [],
-                "what_could_not_be_verified": ["No LLM API key was configured for final synthesis."],
+                "what_could_not_be_verified": [
+                    "Demo mode is active because no LLM API key was configured for final synthesis."
+                ],
             }
         )

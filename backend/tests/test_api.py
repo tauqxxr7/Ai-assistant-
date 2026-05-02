@@ -9,6 +9,9 @@ def test_health_endpoint():
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json()["ok"] is True
+    assert "demo_mode" in response.json()
+    assert "llm_configured" in response.json()
+    assert "search_configured" in response.json()
 
 
 def test_memory_create_list_delete_api(tmp_path):

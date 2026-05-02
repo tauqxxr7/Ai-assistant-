@@ -28,7 +28,15 @@ def get_memory() -> MemoryStore:
 
 @app.get("/health")
 def health():
-    return {"ok": True, "service": settings.app_name, "environment": settings.environment}
+    current_settings = get_settings()
+    return {
+        "ok": True,
+        "service": current_settings.app_name,
+        "environment": current_settings.environment,
+        "demo_mode": current_settings.demo_mode,
+        "llm_configured": current_settings.llm_configured,
+        "search_configured": current_settings.search_configured,
+    }
 
 
 @app.post("/api/chat")

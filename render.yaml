@@ -11,6 +11,12 @@ services:
         value: sqlite:///./assistant.db
       - key: WEB_SEARCH_PROVIDER
         sync: false
+      - key: OPENAI_BASE_URL
+        value: https://api.openai.com/v1
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: USER_AGENT
+        value: LiveAIAssistant/1.0 (+responsible-crawler)
       - key: OPENAI_API_KEY
         sync: false
       - key: BRAVE_SEARCH_API_KEY

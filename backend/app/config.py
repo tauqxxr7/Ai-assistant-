@@ -19,6 +19,21 @@ class Settings:
     request_timeout_seconds: float = 12.0
     max_crawl_pages: int = 8
 
+    @property
+    def llm_configured(self) -> bool:
+        return bool(self.openai_api_key)
+
+    @property
+    def search_configured(self) -> bool:
+        provider = self.web_search_provider.lower()
+        return (provider == "brave" and bool(self.brave_search_api_key)) or (
+            provider == "tavily" and bool(self.tavily_api_key)
+        )
+
+    @property
+    def demo_mode(self) -> bool:
+        return not (self.llm_configured and self.search_configured)
+
 
 @lru_cache
 def get_settings() -> Settings:

@@ -77,7 +77,9 @@ class AgentOrchestrator:
                 except Exception as exc:  # noqa: BLE001
                     missing.append(f"{result.url} could not be opened: {exc}")
             if not results:
-                missing.append("No search provider returned results. Configure BRAVE_SEARCH_API_KEY or TAVILY_API_KEY.")
+                missing.append(
+                    "Demo mode: configure API keys for live answers. No search provider returned results; set WEB_SEARCH_PROVIDER with BRAVE_SEARCH_API_KEY or TAVILY_API_KEY."
+                )
 
         context = self._context(message, remembered, pages, search_sources, verified, missing)
         raw = await self.llm.complete(

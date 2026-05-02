@@ -2,6 +2,10 @@
 
 Production-grade full-stack AI assistant with streaming chat, tool calling, local memory, web verification, and sitemap-aware internet access.
 
+**Repository Description:** Live AI assistant with tool calling, web search, sitemap-aware crawling, robots.txt safety, streaming UI, and memory.
+
+**Recommended Topics:** `ai-agent`, `fastapi`, `nextjs`, `tool-calling`, `web-search`, `sitemap`, `robots-txt`, `rag`, `typescript`, `python`
+
 ## Live Demo
 
 - Frontend: Coming soon
@@ -15,10 +19,12 @@ Most chatbot demos answer confidently even when the question requires current da
 
 Screenshots will be added after a real deployment or local capture. No mock screenshots are included.
 
-- Chat UI: Coming soon
-- Streaming verified answer: Coming soon
-- Memory management: Coming soon
-- Sitemap-aware crawl flow: Coming soon
+- Chat UI: Coming soon (`screenshots/chat-ui.png`)
+- Streaming verified answer: Coming soon (`screenshots/streaming-answer.png`)
+- Memory management: Coming soon (`screenshots/memory-page.png`)
+- Sitemap-aware crawl flow: Coming soon (`screenshots/verification-output.png`)
+
+See [docs/SCREENSHOT_GUIDE.md](docs/SCREENSHOT_GUIDE.md) for exact capture steps.
 
 ## Features
 
@@ -150,14 +156,36 @@ No secrets are hardcoded. Use `.env` locally and managed environment variables i
 
 - `OPENAI_API_KEY` and `OPENAI_BASE_URL` configure any OpenAI-compatible model endpoint.
 - `WEB_SEARCH_PROVIDER` supports `brave`, `tavily`, or `none`.
+- `BRAVE_SEARCH_API_KEY` or `TAVILY_API_KEY` enables live search.
 - `DATABASE_URL` defaults to local SQLite.
-- `NEXT_PUBLIC_API_BASE_URL` points the frontend at the FastAPI backend.
+- `NEXT_PUBLIC_API_URL` points the frontend at the FastAPI backend. If unset, the frontend falls back to `http://localhost:8000` for local development only.
+
+If LLM or search keys are missing, the backend stays healthy and returns a clear demo-mode message: "Demo mode: configure API keys for live answers."
 
 ## Deployment
 
-Frontend: deploy `frontend/` to Vercel and set `NEXT_PUBLIC_API_BASE_URL` to the Render backend URL.
+Frontend: deploy `frontend/` to Vercel and set `NEXT_PUBLIC_API_URL` to the Render backend URL, for example `https://your-render-service.onrender.com`. Do not use the localhost fallback in production.
 
 Backend: deploy `backend/` to Render using `render.yaml`, then configure `OPENAI_API_KEY` and a search provider key.
+
+Render readiness:
+
+- `render.yaml` defines a Python web service rooted at `backend/`.
+- Build command: `pip install -r requirements.txt`.
+- Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`.
+- Health check path: `/health`.
+- Required for live answers: `OPENAI_API_KEY`, `WEB_SEARCH_PROVIDER`, and either `BRAVE_SEARCH_API_KEY` or `TAVILY_API_KEY`.
+- SQLite is acceptable for local/demo use. For persistent multi-user production memory, replace it with Postgres.
+
+Vercel readiness:
+
+- Root directory: `frontend/`.
+- Build command: `npm run build`.
+- Install command: `npm install` or `npm ci`.
+- Required environment variable: `NEXT_PUBLIC_API_URL`.
+- The frontend includes a local-only fallback of `http://localhost:8000` so development works without a deployed backend.
+
+See [docs/SCREENSHOT_GUIDE.md](docs/SCREENSHOT_GUIDE.md) and [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md) for recruiter demo proof steps.
 
 ## Roadmap
 
