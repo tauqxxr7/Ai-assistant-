@@ -2,9 +2,23 @@
 
 Production-grade full-stack AI assistant with streaming chat, tool calling, local memory, web verification, and sitemap-aware internet access.
 
+## Live Demo
+
+- Frontend: Coming soon
+- Backend health: Coming soon
+
 ## Problem Statement
 
 Most chatbot demos answer confidently even when the question requires current data. This project treats live information as an infrastructure problem: the assistant decides when to use memory, when to search, when to inspect a website's `robots.txt` and sitemap, and when to say that something could not be verified.
+
+## Screenshots
+
+Screenshots will be added after a real deployment or local capture. No mock screenshots are included.
+
+- Chat UI: Coming soon
+- Streaming verified answer: Coming soon
+- Memory management: Coming soon
+- Sitemap-aware crawl flow: Coming soon
 
 ## Features
 
@@ -16,6 +30,14 @@ Most chatbot demos answer confidently even when the question requires current da
 - SQLite memory with Postgres-ready boundary, plus list/delete endpoints.
 - Docker, Docker Compose, Render backend config, Vercel frontend config, and health checks.
 - Tests for sitemap parsing, robots handling, tool schema validation, and memory.
+
+## What Makes This Different From a Normal Chatbot?
+
+- Tool calling: the backend exposes explicit tools with strict JSON schemas, so infrastructure actions are validated before execution.
+- Sitemap-aware crawling: website questions trigger sitemap discovery and URL ranking instead of blind page fetching.
+- `robots.txt` safety: the crawler checks access rules and reports blocked pages instead of quietly ignoring policy.
+- Verification contract: factual/current answers must return sources, confidence, what was verified, and what could not be verified.
+- Memory controls: local memory is visible and deletable through API/UI controls, and sensitive data is not stored by default.
 
 ## Architecture
 
@@ -62,8 +84,8 @@ sequenceDiagram
 flowchart TD
   A["Question mentions website/domain"] --> B["Fetch /robots.txt"]
   B --> C{"Allowed?"}
-  C -- "No" --> D["Report blocked by robots.txt"]
-  C -- "Yes" --> E["Read Sitemap directives or /sitemap.xml"]
+  C -->|No| D["Report blocked by robots.txt"]
+  C -->|Yes| E["Read Sitemap directives or /sitemap.xml"]
   E --> F["Parse sitemap index or URL set"]
   F --> G["Rank URLs by query terms and lastmod"]
   G --> H["Open only allowed pages"]
@@ -74,16 +96,20 @@ Google's public guidance says `robots.txt` controls crawler access, while sitema
 
 ## Demo Commands
 
-```bash
-cp .env.example .env
+PowerShell:
+
+```powershell
+Copy .env.example .env
 cd backend
 python -m venv .venv
-.venv\Scripts\activate
+. .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-```bash
+In another PowerShell window:
+
+```powershell
 cd frontend
 npm install
 npm run dev
@@ -91,13 +117,13 @@ npm run dev
 
 Docker:
 
-```bash
+```powershell
 docker compose up --build
 ```
 
 Run tests:
 
-```bash
+```powershell
 cd backend
 pytest
 ```
@@ -126,14 +152,6 @@ No secrets are hardcoded. Use `.env` locally and managed environment variables i
 - `WEB_SEARCH_PROVIDER` supports `brave`, `tavily`, or `none`.
 - `DATABASE_URL` defaults to local SQLite.
 - `NEXT_PUBLIC_API_BASE_URL` points the frontend at the FastAPI backend.
-
-## Screenshots
-
-Add screenshots after running the app locally or deploying:
-
-- Chat interface with streaming status.
-- Verified answer showing citations.
-- Memory sidebar with delete controls.
 
 ## Deployment
 

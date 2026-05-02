@@ -10,6 +10,12 @@ def test_tool_schema_rejects_extra_properties():
         registry.validate("web_search", {"query": "hello", "extra": True})
 
 
+def test_tool_schema_validation_failure_for_missing_required_arg():
+    registry = ToolRegistry(memory=MemoryStore("sqlite:///:memory:"))
+    with pytest.raises(Exception):
+        registry.validate("extract_page_content", {})
+
+
 @pytest.mark.asyncio
 async def test_memory_tool_roundtrip():
     registry = ToolRegistry(memory=MemoryStore("sqlite:///:memory:"))

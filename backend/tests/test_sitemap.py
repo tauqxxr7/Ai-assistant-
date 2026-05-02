@@ -20,3 +20,13 @@ def test_parse_sitemap_index():
     urls, nested = parse_sitemap_xml(xml)
     assert urls == []
     assert nested == ["https://example.com/post-sitemap.xml"]
+
+
+def test_parse_multiple_sitemaps_from_index():
+    xml = """<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <sitemap><loc>https://example.com/pages.xml</loc></sitemap>
+      <sitemap><loc>https://example.com/blog.xml</loc></sitemap>
+    </sitemapindex>"""
+    urls, nested = parse_sitemap_xml(xml)
+    assert urls == []
+    assert nested == ["https://example.com/pages.xml", "https://example.com/blog.xml"]
