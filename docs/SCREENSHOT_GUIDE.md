@@ -33,6 +33,7 @@ Save screenshots under a `screenshots/` folder with these exact filenames:
 - `screenshots/streaming-answer.png`: an answer mid-stream or immediately after streaming completes, with the status indicator visible.
 - `screenshots/memory-page.png`: memory sidebar after saving a preference such as "Remember that I prefer concise answers."
 - `screenshots/verification-output.png`: final answer showing confidence, verified items, unverified items, and source citations if API keys are configured.
+- `screenshots/demo.gif`: 30-second walkthrough. See [DEMO_GIF_GUIDE.md](DEMO_GIF_GUIDE.md).
 
 ## Suggested Capture Flow
 

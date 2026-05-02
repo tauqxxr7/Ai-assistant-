@@ -1,15 +1,23 @@
 # Live AI Assistant
 
-Production-grade full-stack AI assistant with streaming chat, tool calling, local memory, web verification, and sitemap-aware internet access.
+Production-grade full-stack AI assistant with streaming chat, strict tool calling, local memory, real-time web verification, and sitemap-aware internet access.
 
-**Repository Description:** Live AI assistant with tool calling, web search, sitemap-aware crawling, robots.txt safety, streaming UI, and memory.
+Built like AI infrastructure, not a toy chatbot: the backend decides when to answer from memory, when to search, when to inspect `robots.txt` and sitemaps, and when to say something could not be verified.
+
+**Repository Description:** Live AI assistant with tool calling, real-time web search, sitemap-aware crawling, robots.txt safety, streaming UI, and memory.
 
 **Recommended Topics:** `ai-agent`, `fastapi`, `nextjs`, `tool-calling`, `web-search`, `sitemap`, `robots-txt`, `rag`, `typescript`, `python`
 
-## Live Demo
+## Deployment Proof Checklist
 
-- Frontend: Coming soon
-- Backend health: Coming soon
+- Backend Render URL: Coming soon
+- Frontend Vercel URL: Coming soon
+- Screenshots: Coming soon
+- Demo GIF: Coming soon
+- CI: enabled
+- Tests: passing
+
+> Repository note: the current GitHub repo name is `Ai-assistant-`. For a stronger recruiter-facing URL, rename it to `live-ai-assistant` when convenient.
 
 ## Problem Statement
 
@@ -19,12 +27,23 @@ Most chatbot demos answer confidently even when the question requires current da
 
 Screenshots will be added after a real deployment or local capture. No mock screenshots are included.
 
-- Chat UI: Coming soon (`screenshots/chat-ui.png`)
-- Streaming verified answer: Coming soon (`screenshots/streaming-answer.png`)
-- Memory management: Coming soon (`screenshots/memory-page.png`)
-- Sitemap-aware crawl flow: Coming soon (`screenshots/verification-output.png`)
+- Chat UI: Coming soon. Planned file: `screenshots/chat-ui.png`
+- Streaming verified answer: Coming soon. Planned file: `screenshots/streaming-answer.png`
+- Memory management: Coming soon. Planned file: `screenshots/memory-page.png`
+- Verification output: Coming soon. Planned file: `screenshots/verification-output.png`
+- Demo GIF: Coming soon. Planned file: `screenshots/demo.gif`
 
-See [docs/SCREENSHOT_GUIDE.md](docs/SCREENSHOT_GUIDE.md) for exact capture steps.
+Once the real files exist, these README embeds can be enabled:
+
+```markdown
+![Chat UI](screenshots/chat-ui.png)
+![Streaming verified answer](screenshots/streaming-answer.png)
+![Memory management](screenshots/memory-page.png)
+![Verification output](screenshots/verification-output.png)
+![Demo GIF](screenshots/demo.gif)
+```
+
+See [docs/SCREENSHOT_GUIDE.md](docs/SCREENSHOT_GUIDE.md) and [docs/DEMO_GIF_GUIDE.md](docs/DEMO_GIF_GUIDE.md) for exact capture steps.
 
 ## Features
 
@@ -132,6 +151,14 @@ Run tests:
 ```powershell
 cd backend
 pytest
+```
+
+Frontend build and audit:
+
+```powershell
+cd frontend
+npm run build
+npm audit --omit=dev
 ```
 
 ## Example Prompts
